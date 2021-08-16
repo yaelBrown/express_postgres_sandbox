@@ -1,0 +1,79 @@
+5432 - default psql port
+
+docker run --name express_postgres -e POSTGRES_PASSWORD=password -d postgres
+  basic docker container for postgres 
+
+  there is error about volumes. 
+
+psql --help - help when you are not connected to the db
+
+psql -U postgres - connect to postgres server
+  
+\q - quits
+help - shows help
+\? - more help
+
+
+-- databases
+
+\l - shows databases
+create database [dbname] - creates database
+\c [dbname] - connects to database (same as USE [dbname];)
+drop database [dbname] - drops database
+
+
+-- tables
+
+Postgres datatypes - https://www.postgresql.org/docs/9.5/datatype.html
+Mockaroo data generator - https://www.mockaroo.com/
+
+create table people (
+  id int, 
+  first_name varchar(50),
+  last_name varchar(50)
+);
+
+\d - show all tables
+\dt - shows table without sequences
+\d [tableName] - describes the table
+drop table [tableName] - drops table
+
+create table people (
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  first_name varchar(50) NOT NULL,
+  last_name varchar(50) NOT NULL,
+  age int NOT NULL,
+  email varchar(150)
+);
+
+(bigserial is used for autoincrementing)
+
+insert into people (first_name, last_name, age, email) values ('yael', 'brown', 34, 'yael@yaelbrown.com');
+insert into people (first_name, last_name, age, email) values ('Steve', 'Smith', 30, 'steve@stevesmith.com');
+
+
+
+-- tables queries
+
+select first_name from people ORDER BY asc; - display names in ascending ORDER
+  DSC - for descending
+
+select distinct first_name from people - Display unique entries for the defined column
+
+select 1 = 1; #t - comparison operator
+  select 1 = 2; #f 
+  <> - not equal operator
+
+select * from people LIMIT 10; - limits to first 10 records
+
+select * from people OFFSET 5; - does not display first 5 rows
+
+select * from people where first_name IN ('bill','steve','mike') - IN keyword lets you select multiple values instead of using multiple Where's. 
+
+select * from people where first_name BETWEEN 'a' AND 'm' - only show values between a-m. 
+
+select * from people where first_name like '%el' - wildcard matching
+  ilike - ignores key
+  '___%h' - underscores mean, anything that has (3) chars but ends with h, return those
+
+select * from people where first_name COUNT(*) group by first_name - display count of different names

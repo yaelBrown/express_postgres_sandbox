@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+    run:
+        container_name: express_postgres
+        environment:
+            - POSTGRES_PASSWORD=password
+        image: postgres:latest
+        ports:
+          - "5432:5432"
