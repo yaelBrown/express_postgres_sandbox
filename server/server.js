@@ -17,7 +17,7 @@ app.post('/person/add', async (req, res) => {
 
     console.log(data)
 
-    const newPerson = await pool.query("insert into people (first_name, last_name, age, email)  values ('Billie', 'bob', 24, 'bbob@canada.net') RETURNING *")
+    const newPerson = await pool.query("insert into people (first_name, last_name, age, email)  values ($1, $2, $3, $4) RETURNING *", data)
       .then(() => console.log("This worked"))
       .catch(err => console.log(err))
 
@@ -47,11 +47,6 @@ app.get('/person/', async (req, res) => {
     res.send({msg: "err", err})
   }
 })
-
-
-
-
-
 
 
 
