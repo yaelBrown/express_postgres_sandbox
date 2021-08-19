@@ -77,3 +77,30 @@ select * from people where first_name like '%el' - wildcard matching
   '___%h' - underscores mean, anything that has (3) chars but ends with h, return those
 
 select * from people where first_name COUNT(*) group by first_name - display count of different names
+
+
+
+
+
+
+-- joins
+
+INNER JOINS - is the intersection of two tables. 
+  if item exists in both tables it will be returned
+
+SELECT * FROM person JOIN car ON person.car_id = car.id; 
+
+\x - expanded view, makes the results look pretty
+
+LEFT JOIN - Return records from both tables and all items in (left) table that does not have a relationship with the foreign table.
+
+SELECT * FROM person LEFT JOIN car ON car.id = person.car_id;
+
+
+
+-- Deletes
+
+no cascades in postgres? 
+  have to delete the left key, or assign it as NULL
+
+cascade is bad practice.
